@@ -16,7 +16,7 @@ body {
 .titleAndImgContainer {
   position: fixed;
   top: 0;
-  left: 40%;
+  left: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +38,7 @@ body {
 
 .scores-wrapper {
   color: white;
+  max-width: 400px;
 }
 
 #game-board {
@@ -60,21 +61,23 @@ body {
   border: 0.25vmin solid black;
 }
 
-.formAndLeaderboardWrapper {
-  margin-bottom: 140px;
-}
-
 #leaderboard {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
+  max-height: 70vh;
 }
 
 #leaderboard h2 {
   margin-top: 40px;
   margin-bottom: 10px;
   color: white;
+}
+
+#leaderboard table {
+  overflow-y: scroll;
 }
 
 th,
