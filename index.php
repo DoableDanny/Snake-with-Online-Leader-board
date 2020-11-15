@@ -43,7 +43,6 @@
     $getTheUserSql = "SELECT username, score FROM high_scores WHERE username='$name'";
     $userResult = mysqli_query($conn, $getTheUserSql);
     $user = mysqli_fetch_assoc($userResult);
-    echo print_r($user);
     return $user;
   }
 
@@ -60,6 +59,8 @@
     if(isset($user['username']) && isset($user['score'])) {
       $userExists = true;
       $highScore = $user['score'];
+
+      echo "User found in DB";
 
       if($highScore < $score) {
         $highScore = $score;
@@ -79,6 +80,7 @@
       $addNewUserSql = "INSERT INTO high_scores(username, score) VALUES('$name', '$score')";
       if(mysqli_query($conn, $addNewUserSql)) {
         $highScore = $score;
+        echo "User added succesffully";
       } else {
         echo sqli_error($conn);
       }
