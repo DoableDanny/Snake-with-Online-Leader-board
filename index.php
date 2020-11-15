@@ -1,5 +1,5 @@
 <?php
-  include 'DB_config.php';
+  include 'DB_config_Heroku.php';
 
   // Bring in the packages we've installed
   require_once realpath("vendor/autoload.php");
@@ -60,8 +60,6 @@
       $userExists = true;
       $highScore = $user['score'];
 
-      echo "User found in DB";
-
       if($highScore < $score) {
         $highScore = $score;
         $score = mysqli_real_escape_string($conn, $score);
@@ -80,7 +78,6 @@
       $addNewUserSql = "INSERT INTO high_scores(username, score) VALUES('$name', '$score')";
       if(mysqli_query($conn, $addNewUserSql)) {
         $highScore = $score;
-        echo "User added succesffully";
       } else {
         echo sqli_error($conn);
       }
