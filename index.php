@@ -1,23 +1,14 @@
 <?php
-  include 'DB_config_Heroku.php';
 
   // Bring in the packages we've installed
   require_once realpath("vendor/autoload.php");
 
-  // FOR LOCAL DEVELOPMENT ONLY////////////////////////////////////////
-  // // Create immutable object with .env vars then load them to here
-  // $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-  // $dotenv->load();
+  // Configure and connect to Heroku MySQL DB (for deployment only)
+  include 'DB_config_Heroku.php';
 
-  // define("DB_SERVER", $_ENV['DB_SERVER']);
-  // define("DB_USERNAME", $_ENV['DB_USERNAME']);
-  // define("DB_PASSWORD", $_ENV['DB_PASSWORD']);
-  // define("DB_NAME", $_ENV['DB_NAME']);
-  ////////////////////////////////////////////////////////////////
-
-  // Connect to DB
-  $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-
+  // Configure and connect to local DB (for development only)
+  // include 'DB_config_local.php';
+ 
   // Check connection
   if(!$conn) {
     echo "Connection error: " . mysqli_connect_error();
@@ -144,6 +135,6 @@
         </table>
       </div>
     </div>
-   
+    <footer>Made for fun by Danny Adams. Subscribe to my <a href="https://www.youtube.com/channel/UC0URylW_U4i26wN231yRqvA?view_as=subscriber" target="_blank">YouTube Channel.</a>I plan to make coding tutorials soon, I promise!</footer>
   </body>
 </html>
