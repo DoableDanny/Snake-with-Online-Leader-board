@@ -14,16 +14,14 @@
   // define("DB_PASSWORD", $_ENV['DB_PASSWORD']);
   // define("DB_NAME", $_ENV['DB_NAME']);
   ////////////////////////////////////////////////////////////////
+
   // Connect to DB
   $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 
   // Check connection
   if(!$conn) {
     echo "Connection error: " . mysqli_connect_error();
-  } else {
-    echo "Connection great success!";
   }
-
 
   $name = $_COOKIE['username'] ?? "a guest";
   $highScore = $name === "a guest" ? '0 (login to save high score!)' : 0;
@@ -45,6 +43,7 @@
     $getTheUserSql = "SELECT username, score FROM high_scores WHERE username='$name'";
     $userResult = mysqli_query($conn, $getTheUserSql);
     $user = mysqli_fetch_assoc($userResult);
+    echo print_r($user);
     return $user;
   }
 
