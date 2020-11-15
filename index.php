@@ -34,6 +34,7 @@
     $getTheUserSql = "SELECT username, score FROM high_scores WHERE username='$name'";
     $userResult = mysqli_query($conn, $getTheUserSql);
     $user = mysqli_fetch_assoc($userResult);
+    mysqli_free_result($userResult);
     return $user;
   }
 
@@ -84,6 +85,11 @@
   // Put result into associative array format
   $usersAndScores = mysqli_fetch_all($result, MYSQLI_ASSOC);
   
+  // Free result from memory (good practice)
+  mysqli_free_result($result);
+
+  // Close connection
+  mysqli_close($conn);
 
 ?>
 
