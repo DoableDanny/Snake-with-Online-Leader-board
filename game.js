@@ -7,7 +7,7 @@ import {
 } from './snake.js';
 import { update as updateFood, draw as drawFood } from './food.js';
 import { outsideGrid } from './grid.js';
-import { draw as drawScore, checkForNewHighScore, getScore } from './score.js';
+import { draw as drawScore, getScore } from './score.js';
 
 const gameBoard = document.getElementById('game-board');
 let lastRenderTime = 0;
@@ -18,7 +18,8 @@ function main(currentTime) {
     if (
       confirm('YOU KILLED THE SNAKE! Press Enter or click OK to respawn 🐍')
     ) {
-      window.location = `./?score=${getScore()}`;
+      // window.location = `./?score=${getScore()}`;
+      postScore(getScore());
     }
     return;
   }
@@ -52,6 +53,24 @@ function draw() {
 function checkDeath() {
   if (outsideGrid(getSnakeHead()) || snakeIntersection()) {
     gameOver = true;
-    checkForNewHighScore();
   }
+}
+
+function postScore(score) {
+  const data = { score: score };
+
+  fetch('./', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }

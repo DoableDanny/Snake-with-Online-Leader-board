@@ -4,10 +4,10 @@
   require_once realpath("vendor/autoload.php");
 
   // Configure and connect to Heroku MySQL DB (for deployment only)
-  include 'DB_config_Heroku.php';
+  // include 'DB_config_Heroku.php';
 
   // Configure and connect to local DB (for development only)
-  // include 'DB_config_local.php';
+  include 'DB_config_local.php';
  
   // Check connection
   if(!$conn) {
@@ -15,17 +15,29 @@
   }
 
   $name = $_COOKIE['username'] ?? "a guest";
-  $highScore = $name === "a guest" ? '0 (login to save high score!)' : 0;
+  // $highScore = $name === "a guest" ? '0 (login to save high score!)' : 0;
+  if($name !== "a guest") {
+    $highScore = $_COOKIE['highScore'] ?? 0;
+  } else {
+    $highScore = '0 (login to save high score!)';
+  }
+
   // Check if new username set
   if(isset($_POST['username'])) {
     $highScore = 0;
-    $name = $_POST['username'];
-    $user = getUserFromDB($name);
-    if(isset($user['score'])) {
-    $highScore = $user['score'];
+    // REGEX check if valid twitter username
+    if(!preg_match("/^@?(\w){1,15}$/", $_POST['username'])) {
+      $invalidNameError = $_POST['username'] . ' is not a valid twitter username';
+    } else {
+      $name = $_POST['username'];
+      $user = getUserFromDB($name);
+      if(isset($user['score'])) {
+      $highScore = $user['score'];
+      }
+      // Set cookie for 4 days
+      setcookie('username', $name, time() + 345600);
+      setcookie('highScore', $highScore, time() + 345600);
     }
-    // Set cookie for 4 days
-    setcookie('username', $name, time() + 345600);
   }
 
   function getUserFromDB($name) {
@@ -54,6 +66,7 @@
 
       if($highScore < $score) {
         $highScore = $score;
+        setcookie('highScore', $highScore, time() + 345600);
         $score = mysqli_real_escape_string($conn, $score);
         $updateScoreSQL = "UPDATE high_scores SET score=$score WHERE username='$name'";
 
@@ -70,10 +83,12 @@
       $addNewUserSql = "INSERT INTO high_scores(username, score) VALUES('$name', '$score')";
       if(mysqli_query($conn, $addNewUserSql)) {
         $highScore = $score;
+        setcookie('highScore', $highScore, time() + 345600);
       } else {
         echo sqli_error($conn);
       }
     }
+
   }
 
   // Write query to get users and their scores
@@ -121,6 +136,9 @@
       <form action="./" method="POST">
         <label for="username">Enter your twitter username to take part!</label>
         <input type="text" name="username" id="username" value="@">
+        <?php if(isset($invalidNameError)) : ?>
+          <span class="invalid-name-error"><?php echo $invalidNameError; ?></span>
+        <?php endif; ?>
         <input type="submit" name="submit" value="Submit">
       </form>
       <div id="leaderboard">

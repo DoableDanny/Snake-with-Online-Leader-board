@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&family=Cousine&display=swap');
 
 body {
-  background-color: black;
+  background-color: #888;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,6 +110,11 @@ form input[type='submit'] {
 form label {
   color: #fff;
   width: 80%;
+}
+
+form .invalid-name-error {
+  color: rgb(255, 108, 108);
+  margin-top: 7px;
 }
 
 footer {
