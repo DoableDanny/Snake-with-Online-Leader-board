@@ -4,10 +4,10 @@
   require_once realpath("vendor/autoload.php");
 
   // Configure and connect to Heroku MySQL DB (for deployment only)
-  // include 'DB_config_Heroku.php';
+  include 'DB_config_Heroku.php';
 
   // Configure and connect to local DB (for development only)
-  include 'DB_config_local.php';
+  // include 'DB_config_local.php';
 
   // Check connection
   if(!$conn) {
