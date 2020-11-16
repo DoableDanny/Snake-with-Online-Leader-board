@@ -8,14 +8,14 @@
 
   // Configure and connect to local DB (for development only)
   include 'DB_config_local.php';
- 
+
   // Check connection
   if(!$conn) {
     echo "Connection error: " . mysqli_connect_error();
   }
 
   $name = $_COOKIE['username'] ?? "a guest";
-  // $highScore = $name === "a guest" ? '0 (login to save high score!)' : 0;
+ 
   if($name !== "a guest") {
     $highScore = $_COOKIE['highScore'] ?? 0;
   } else {
@@ -53,8 +53,8 @@
   // If user exists and new highscore, update in DB. Otherwise, create new user row.
   $userExists = false;
 
-  if($name !== "a guest" && isset($_GET['score'])) {
-    $score = $_GET['score'];
+  if($name !== "a guest" && isset($_POST['score'])) {
+    $score = $_POST['score'];
 
     // Fetch the user from DB
     $user = getUserFromDB($name);

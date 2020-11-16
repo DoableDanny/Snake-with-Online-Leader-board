@@ -16,9 +16,10 @@ let gameOver = false;
 function main(currentTime) {
   if (gameOver) {
     if (
-      confirm('YOU KILLED THE SNAKE! Press Enter or click OK to respawn 🐍')
+      confirm(
+        'YOU KILLED THE SNAKE! Press Enter or click OK to post score & respawn 🐍'
+      )
     ) {
-      // window.location = `./?score=${getScore()}`;
       postScore(getScore());
     }
     return;
@@ -57,20 +58,13 @@ function checkDeath() {
 }
 
 function postScore(score) {
-  const data = { score: score };
+  const xhr = new XMLHttpRequest();
 
-  fetch('./', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  xhr.open('POST', 'index.php');
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.send(`score=${score}`);
+
+  xhr.onload = function () {
+    window.location = './';
+  };
 }
