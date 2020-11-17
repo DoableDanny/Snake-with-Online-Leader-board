@@ -4,10 +4,10 @@
   require_once realpath("vendor/autoload.php");
 
   // Configure and connect to Heroku MySQL DB (for deployment only)
-  include 'DB_config_Heroku.php';
+  // include 'DB_config_Heroku.php';
 
   // Configure and connect to local DB (for development only)
-  // include 'DB_config_local.php';
+  include 'DB_config_local.php';
 
   // Check connection
   if(!$conn) {
@@ -114,7 +114,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SNAKE</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <script src="game.js" defer type="module"></script>
   </head>
   <body>

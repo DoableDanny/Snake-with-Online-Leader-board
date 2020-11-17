@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&family=Cousine&display=swap');
+body {
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: 'Cousine', monospace;
+}
+
+.titleAndImgContainer {
+  position: fixed;
+  top: 0;
+  left: 45%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.titleAndImgContainer h1 {
+  font-family: 'Big Shoulders Stencil Text', cursive;
+  color: #a3ea6e;
+  margin-top: 17px;
+  margin-bottom: 5px;
+  font-size: 2.8rem;
+  border-bottom: 2px dotted #a3ea6e;
+}
+
+.titleAndImgContainer img {
+  width: 80px;
+}
+
+.scores-wrapper {
+  color: white;
+  max-width: 400px;
+}
+
+#game-board {
+  background-color: #ccc;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr) [21];
+  grid-template-columns: repeat(21, 1fr);
+  -ms-grid-rows: (1fr) [21];
+  grid-template-rows: repeat(21, 1fr);
+  height: 70vmin;
+  width: 70vmin;
+  margin-right: 40px;
+}
+
+@media only screen and (max-width: 1000px) {
+  #game-board {
+    margin-right: 0;
+  }
+}
+
+.snake {
+  background-color: #13db2e;
+  border: 0.25vmin solid black;
+}
+
+.food {
+  background-color: #f11ce6;
+  border: 0.25vmin solid black;
+}
+
+#leaderboard {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+
+#leaderboard h2 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+#leaderboard table {
+  overflow-y: scroll;
+}
+
+th,
+td {
+  border-bottom: 0.5px solid #ccc;
+  padding: 5px;
+  color: #fff;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+form input {
+  width: 80%;
+  padding: 7px;
+  margin-top: 13px;
+  border-radius: 10px;
+  border: none;
+}
+
+form input[type='submit'] {
+  width: 83%;
+  font-size: 1.1rem;
+}
+
+form label {
+  color: #fff;
+  width: 80%;
+}
+
+form .invalid-name-error {
+  color: #ff6c6c;
+  margin-top: 7px;
+}
+
+footer {
+  color: #dddddd;
+  position: fixed;
+  bottom: 4px;
+  width: 95%;
+  text-align: center;
+}
+
+footer a {
+  color: #a3ea6e;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,4 +1,4 @@
-# Snake with Online Leader Board
+# Desktop Snake Game with Online Leader Board
 
 https://snake-danny.herokuapp.com/
 
